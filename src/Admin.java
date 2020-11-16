@@ -1,6 +1,6 @@
 import static java.lang.System.*;
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class Admin {
     public static void main() {
@@ -41,17 +41,17 @@ public class Admin {
         String quantity = Data.QuantityPeople("ListOfAssistant.txt");
         out.println("Для добавления нового лаборанта введите след. данные");
         out.print("Фамилия: ");
-        String FIO = scan.next();
+        String FIO = Check.checkN(scan.next());
         out.print("Имя: ");
-        FIO += " " + scan.next();
+        FIO += " " + Check.checkN(scan.next());
         out.print("Отчество: ");
-        FIO += " " + scan.next();
-        out.print("Дата рождения (Пример: 12/01/2020): ");
-        String date = scan.next();
+        FIO += " " + Check.checkN(scan.next());
+        out.print("Дата рождения (Пример: 02.01.2020): "); //10
+        String date = Check.checkDate(scan.next());
         out.print("СНИЛС(Пример: 70955214100): ");
-        String snils = scan.next();
-        out.print("Номер телефона(Пример: +79029706364): ");
-        String tel = scan.next();
+        String snils = Check.checkSn(scan.next());
+        out.print("Номер телефона(Примеры: \n+79029706364\n89103123167\n+7(910)-221-22-22\n+7-910-221-22-22): ");
+        String tel = Check.checkTel(scan.next());
 
         out.println("Для пользователя будет необходима авторизация. Введите данные");
         out.print("Логин: ");
