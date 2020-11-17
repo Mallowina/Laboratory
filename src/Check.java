@@ -45,19 +45,11 @@ public class Check {
         Scanner scan = new Scanner(System.in);
 
         String regex = "^\\+?[78][-\\(]?\\d{3}\\)?-?\\d{3}-?\\d{2}-?\\d{2}$"; //допускает варианты:
-<<<<<<< HEAD
                                                                               //89103123167
-=======
-        //89103123167
->>>>>>> Auth
         if (!tel.matches(regex)) {                                            //+7-910-221-22-22
             out.println("Ошибка ввода. Введите заново. ");                    //+7(910)-221-22-22
             tel = checkTel(scan.next());                                      //ну и в таком духе
         }
         return tel;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Auth

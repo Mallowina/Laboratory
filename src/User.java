@@ -3,13 +3,12 @@ import java.util.Scanner;
 
 public class User {
     public static Scanner scan = new Scanner(System.in);
-    public static void User(){
+    public static void User(String fio){
 
         String SNILS = "SNILS";//////////////////////////////////////////////////////////////
-        String Name;
-        String Family;
+
         Scanner scan = new Scanner(System.in);
-        System.out.println("Добро пожаловать "+ Name + Family);// c  входа
+        System.out.println("Добро пожаловать "+ fio);// c  входа
         System.out.println(SNILS);
         System.out.println("++++++++++++++++++++++++++++++++++");
         System.out.println("1.Оставить заявку на исследование пробирки");
@@ -28,7 +27,7 @@ public class User {
                 System.out.println("!Вы успешно подали заявку!");
                 writer.flush();
                 writer.close();
-                user.User();
+                User(fio);
             }
             catch(IOException ex) {
                 System.out.println(ex.getMessage());
@@ -56,6 +55,7 @@ public class User {
 
         if (N.equals("3")){
             // выходим в вход
+            Menu.Entry();
         }
     }
 }

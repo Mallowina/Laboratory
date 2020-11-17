@@ -1,14 +1,12 @@
 import static java.lang.System.*;
-<<<<<<< HEAD
 import java.io.*;
-=======
->>>>>>> Auth
 import java.util.*;
 
 public class Admin {
-    public static void main() {
+    public static void main(String fio) {
         Scanner scan = new Scanner(System.in);
 
+        out.println("Приветствуем " + fio);
         out.println("Доступные действия: ");
         out.println("\t1. Просмотреть информацию о пользователях");
         out.println("\t2. Просмотреть информацию о лаборантах");
@@ -19,17 +17,17 @@ public class Admin {
         int action = 0;
         if (!scan.hasNextInt()) {
             out.println("Ты должен ввести число.\n");
-            main();
+            main("");
         } else action = scan.nextInt();
 
         switch (action) {
             case 1: InfoPeople("ListOfPeople.txt");
             case 2: InfoPeople("ListOfAssistant.txt");
             case 3: CreatePeople();
-            case 4: exit(0);
+            case 4: Menu.Entry();
             default: {
                 out.println("Введи число соответсвующее списку\n");
-                main();
+                main(fio);
             }
         }
     }
@@ -38,7 +36,7 @@ public class Admin {
         String result = Data.List(nameList);
         if (result.equals("File is empty")) out.println("File is empty");
         else out.println("Что-то пошло не так со списком (Data.ListOfPeople)");
-        main();
+        main("");
     }
     public static void CreatePeople() {
         Scanner scan = new Scanner(System.in);
@@ -66,10 +64,6 @@ public class Admin {
         Data.registPeop(quantity, FIO, date, snils, tel, "ListOfAssistant.txt");
         Data.addLog(log, pas, quantity);
 
-        main();
+        main("");
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Auth
