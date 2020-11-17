@@ -1,3 +1,7 @@
 qwe 123 Admin 1
+<<<<<<< HEAD
 rty 456 Client 2
+=======
+rty 456 Client 1
+>>>>>>> Auth
 uio 789 Assistant 1

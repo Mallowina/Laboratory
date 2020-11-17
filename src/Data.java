@@ -61,7 +61,11 @@ public class Data {
             fos.write(" ".getBytes());
             fos.write(pas.getBytes());
             fos.write(" ".getBytes());
+<<<<<<< HEAD
             fos.write("Assistant ".getBytes());
+=======
+            fos.write("Client ".getBytes());
+>>>>>>> Auth
             fos.write(q.getBytes());
             fos.write("\n".getBytes());
         }
@@ -69,4 +73,8 @@ public class Data {
             out.println(ex.getMessage());
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Auth

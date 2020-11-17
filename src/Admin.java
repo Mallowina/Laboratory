@@ -1,5 +1,8 @@
 import static java.lang.System.*;
+<<<<<<< HEAD
 import java.io.*;
+=======
+>>>>>>> Auth
 import java.util.*;
 
 public class Admin {
@@ -65,4 +68,8 @@ public class Admin {
 
         main();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Auth
