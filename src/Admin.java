@@ -8,8 +8,9 @@ public class Admin {
 
         out.println("Доступные действия: ");
         out.println("\t1. Просмотреть информацию о пользователях");
-        out.println("\t2. Добавить нового лаборанта");
-        out.println("\t3. Выход");
+        out.println("\t2. Просмотреть информацию о лаборантах");
+        out.println("\t3. Добавить нового лаборанта");
+        out.println("\t4. Выход");
         out.print("Для выполнения действия введите номер: ");
 
         int action = 0;
@@ -19,9 +20,10 @@ public class Admin {
         } else action = scan.nextInt();
 
         switch (action) {
-            case 1: InfoPeople();
-            case 2: CreatePeople();
-            case 3: exit(0);
+            case 1: InfoPeople("ListOfPeople.txt");
+            case 2: InfoPeople("ListOfAssistant.txt");
+            case 3: CreatePeople();
+            case 4: exit(0);
             default: {
                 out.println("Введи число соответсвующее списку\n");
                 main();
@@ -29,10 +31,9 @@ public class Admin {
         }
     }
 
-    public static void InfoPeople() {
-        String result = Data.ListOfPeople();
+    public static void InfoPeople(String nameList) {
+        String result = Data.List(nameList);
         if (result.equals("File is empty")) out.println("File is empty");
-        else if (result.equals("ok")) out.println("ok");
         else out.println("Что-то пошло не так со списком (Data.ListOfPeople)");
         main();
     }

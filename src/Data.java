@@ -8,13 +8,13 @@ import static java.lang.System.out;
 
 
 public class Data {
-    public static String ListOfPeople() {
-        try (Scanner ScanPeop = new Scanner(new File("ListOfPeople.txt"))) {
-            if (!ScanPeop.hasNext()) {
+    public static String List(String nameList) {
+        try (Scanner Scan = new Scanner(new File(nameList))) {
+            if (!Scan.hasNext()) {
                 return "File is empty";
             }
-            while (ScanPeop.hasNextLine()) {
-                out.println(ScanPeop.nextLine());
+            while (Scan.hasNextLine()) {
+                out.println(Scan.nextLine());
             }
         } catch (FileNotFoundException e) {
             System.out.printf("File [%s] is not found.\n");
