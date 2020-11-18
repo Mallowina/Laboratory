@@ -79,7 +79,7 @@ public class Menu {
                         break;
                     }
                     case "User": {
-                        User.User(Data.GetFIO(numF));
+                        User.User(Data.GetFIO(numF), numF);
                     }
                     case "Assistant": {
                         Laborant.work();
