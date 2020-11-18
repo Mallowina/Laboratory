@@ -100,7 +100,6 @@ public class Menu {
     public static void Registration() {
         System.out.println("-------------------------------------------");
         System.out.println("(Регистрация)");
-        String quantity = Data.QuantityPeople("ListOfPeople.txt");
         out.print("Фамилия: ");
         String FIO = Check.checkN(scan.next());
         out.print("Имя: ");
@@ -151,9 +150,9 @@ public class Menu {
         out.print("Введите пароль: ");
         Password = scan.next();
         // Data recording
-        Data.registPeop(quantity, FIO, date, snils, tel, "ListOfPeople.txt");
-        Data.addLog(Login, Password, quantity);
-        out.println("!Вы успешно зарегистрировались!");
+        Data.registPeop(FIO, date, snils, tel);
+        Data.addLog(Login, Password, "User", snils);
+        out.println("!Вы успешно зарегистрировались как пользователь!");
         Menu.Entry();
     }
 }

@@ -12,11 +12,8 @@ public class Laborant {
             int A = scan.nextInt();
             switch (A){
                 case 1:Laborant.Request();break;
-
                 case 2:Laborant.Tube();break;
-
                 case 3:Laborant.Information();break;
-
                 case 4:flag = true;break;
                 default:System.out.println("Вы ввели неверное значение!");
             }
@@ -25,7 +22,7 @@ public class Laborant {
     public static void Request(){
         ArrayList <String> Canceled = new ArrayList<String>();
         Scanner scan = new Scanner(System.in);
-        try (Scanner TR = new Scanner(new File("Заявки.txt"))) {
+        try (Scanner TR = new Scanner(new File("application.txt"))) {
             if (!TR.hasNext()) {
                 System.out.println("Файл пуст!");
             }
@@ -56,14 +53,14 @@ public class Laborant {
         } catch (FileNotFoundException e) {
             System.out.printf("File [%s] is not found.\n");
         }
-        try(FileOutputStream writer = new FileOutputStream("Заявки.txt", false))
+        try(FileOutputStream writer = new FileOutputStream("application.txt", false))
         {
             writer.write("".getBytes());
         }
         catch(IOException ex){
             System.out.println(ex.getMessage());
         }
-        try(FileOutputStream writer = new FileOutputStream("Заявки.txt", true))
+        try(FileOutputStream writer = new FileOutputStream("application.txt", true))
         {
             for (String PL : Canceled)
             {
