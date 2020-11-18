@@ -124,14 +124,13 @@ public class Data {
         out.print("Номер телефона(Примеры: \n+79029706364\n89103123167\n+7(910)-221-22-22\n+7-910-221-22-22): ");
         String tel = Check.checkTel(scan.next());
 
-        out.println("Для пользователя будет необходима авторизация. Введите данные");
-        out.print("Логин: ");
-        String log = scan.next();
-        out.print("Пароль: ");
-        String pas = scan.next();
-
-        registPeop(FIO, date, snils, tel);
-        addLog(log, pas, role, snils);
+        out.print("Введите логин: ");
+        String Login = Check.checkLog(scan.next());
+        out.print("Введите пароль: ");
+        String Password = scan.next();
+        // Data recording
+        Data.registPeop(FIO, date, snils, tel);
+        Data.addLog(Login, Password, role, snils);
 
     }
 }

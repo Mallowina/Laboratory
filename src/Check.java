@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -25,7 +27,35 @@ public class Check {
             out.println("Ошибка ввода. Введите заново. Количество символов не 11.");
             snils = checkSn(scan.next());
         }
+        try (Scanner Scan = new Scanner(new File("ListOfPeople.txt"))) {
+            while (Scan.hasNextLine()) {
+                String text[] = Scan.nextLine().split(" ");
+                if (snils.equals(text[0])) {
+                    out.println("Такой СНИЛС уже существует.");
+                    snils = checkSn(scan.next());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.printf("File [%s] is not found.\n");
+        }
         return snils;
+    }
+
+    public static String checkLog(String log) {
+        Scanner scan = new Scanner(System.in);
+
+        try (Scanner Scan = new Scanner(new File("Authorization.txt"))) {
+            while (Scan.hasNextLine()) {
+                String text[] = Scan.nextLine().split(" ");
+                if (log.equals(text[0])) {
+                    out.println("Такой логин уже существует.");
+                    log = checkLog(scan.next());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.printf("File [%s] is not found.\n");
+        }
+        return log;
     }
 
     public static String checkDate(String date) {
