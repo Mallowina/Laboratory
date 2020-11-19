@@ -33,8 +33,7 @@ public class User {
                 {
                     System.out.println("Введите номер анализа");
 
-                    //Добавить номер анализа
-
+                    Prob = scan.next();
                     writer.write(Prob + " " + SNILS);
                     writer.append('\n');
                     System.out.println("Вы успешно подали заявку!");
