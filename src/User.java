@@ -28,8 +28,8 @@ public class User {
         } else action = scan.nextInt();
 
         switch (action) {
-            case 1: {
-                try(FileWriter writer = new FileWriter("Prob.txt", true))
+            case 1: {           //Добавление новой заявки
+                try(FileWriter writer = new FileWriter("application.txt", true))
                 {
                     System.out.println("Введите номер пробирки");
                     Prob = scan.next();

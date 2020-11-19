@@ -5,7 +5,7 @@ import java.util.*;
 public class Admin {
     public static String FIO;
     public static void main(String fio) {
-        FIO = fio;
+        FIO = fio;  //Переменная для вывозова главной функии из любого метода
         Scanner scan = new Scanner(System.in);
 
         out.println("\n\n -----------------------------------");
@@ -20,22 +20,22 @@ public class Admin {
         out.print("Для выполнения действия введите номер: ");
 
         int action = 0;
-        if (!scan.hasNextInt()) {
+        if (!scan.hasNextInt()) {               //Проверка, что введено число
             out.println("Ты должен ввести число.\n");
             main(FIO);
         } else action = scan.nextInt();
 
         switch (action) {
-            case 1: Data.SnilsRole("User"); main(FIO);
+            case 1: Data.SnilsRole("User"); main(FIO);     //Вызов метода выводящей инфромацию о пользователях с соответствующей ролью
             case 2: Data.SnilsRole("Assistant"); main(FIO);
             case 3: Data.SnilsRole("Admin"); main(FIO);
             case 4: {
                 out.println("Для добавления нового лаборанта введите след. данные");
-                Data.CreatePeople("Assistant");
+                Data.CreatePeople("Assistant");  //Вызов метода для создания нового пользователя с соответствующей ролью
                 main(FIO);
             }
             case 5: {
-                out.println("Для добавления нового лаборанта введите след. данные");
+                out.println("Для добавления нового администратора введите след. данные");
                 Data.CreatePeople("Admin");
                 main(FIO);
             }

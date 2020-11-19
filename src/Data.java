@@ -7,7 +7,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 public class Data {
-    public static void List(String nameList) {
+    public static void List(String nameList) {          //Метод выводящий все данные из файла
         try (Scanner Scan = new Scanner(new File(nameList))) {
             if (!Scan.hasNext()) {
                 out.println("File is empty");
@@ -20,7 +20,7 @@ public class Data {
         }
     }
 
-    public static void SnilsRole (String role) {
+    public static void SnilsRole (String role) {   //Метод выводящий людей с определенной ролью
         try (Scanner Scan = new Scanner(new File("Authorization.txt"))) {
             while (Scan.hasNextLine()) {
                 String words[] = Scan.nextLine().split(" ");
@@ -41,7 +41,7 @@ public class Data {
         }
     }
 
-    public static String GetFIO(String snils) {
+    public static String GetFIO(String snils) {         //Метод для получения имени по СНИЛСу
         try (Scanner Scan = new Scanner(new File("ListOfPeople.txt"))) {
             if (!Scan.hasNext()) {
                 return "File is empty";
@@ -59,22 +59,7 @@ public class Data {
         return "";
     }
 
-
-//    public static String QuantityPeople(String NameOfList) {
-//        int count = 0;
-//        try (Scanner ScanPeop = new Scanner(new File(NameOfList))) {
-//            while (ScanPeop.hasNextLine()) {
-//                ScanPeop.nextLine();
-//                count++;
-//            }
-//        } catch (FileNotFoundException e) {
-//            System.out.printf("File [%s] is not found.\n");
-//        }
-//
-//        return String.valueOf(++count);
-//    }
-
-    public static void registPeop(String FIO, String date, String snils, String tel) {
+    public static void registPeop(String FIO, String date, String snils, String tel) { //Метод записи в файл данных о пользователе
         try(FileOutputStream fos=new FileOutputStream("ListOfPeople.txt", true))
         {
             fos.write(snils.getBytes());
@@ -91,7 +76,7 @@ public class Data {
         }
     }
 
-    public static void addLog(String log, String pas, String role, String q) {
+    public static void addLog(String log, String pas, String role, String q) { //Метод записи в файл данных регистрации
         try(FileOutputStream fos=new FileOutputStream("Authorization.txt", true))
         {
             fos.write(log.getBytes());
@@ -108,7 +93,7 @@ public class Data {
         }
     }
 
-    public static void CreatePeople(String role) {
+    public static void CreatePeople(String role) {  //Метод получения данных о пользователе и отправление их на запись
         Scanner scan = new Scanner(System.in);
 
         out.print("Фамилия: ");
@@ -132,5 +117,22 @@ public class Data {
         Data.registPeop(FIO, date, snils, tel);
         Data.addLog(Login, Password, role, snils);
 
+        out.println("");
+
     }
 }
+
+
+//    public static String QuantityPeople(String NameOfList) {
+//        int count = 0;
+//        try (Scanner ScanPeop = new Scanner(new File(NameOfList))) {
+//            while (ScanPeop.hasNextLine()) {
+//                ScanPeop.nextLine();
+//                count++;
+//            }
+//        } catch (FileNotFoundException e) {
+//            System.out.printf("File [%s] is not found.\n");
+//        }
+//
+//        return String.valueOf(++count);
+//    }

@@ -6,7 +6,7 @@ import java.util.regex.*;
 import static java.lang.System.out;
 
 public class Check {
-    public static String checkN(String word) {
+    public static String checkN(String word) {  //Метод проверки таких данных как ФИО
         Scanner scan = new Scanner(System.in);
 
         String regex = "[a-zA-Zа-яёА-ЯЁ]+";
@@ -18,7 +18,7 @@ public class Check {
         return word;
     }
 
-    public static String checkSn(String snils) {
+    public static String checkSn(String snils) {   //Метод проверки СНИЛСа
         Scanner scan = new Scanner(System.in);
 
         String regex = "\\d+";
@@ -41,7 +41,7 @@ public class Check {
         return snils;
     }
 
-    public static String checkLog(String log) {
+    public static String checkLog(String log) {          //Метод проверки логина
         Scanner scan = new Scanner(System.in);
 
         try (Scanner Scan = new Scanner(new File("Authorization.txt"))) {
@@ -58,7 +58,7 @@ public class Check {
         return log;
     }
 
-    public static String checkDate(String date) {
+    public static String checkDate(String date) {  //Метод проверки даты
         Scanner scan = new Scanner(System.in);
 
         Pattern pattern = Pattern.compile("(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\\d\\d)");
@@ -71,7 +71,7 @@ public class Check {
         return date;
     }
 
-    public static String checkTel(String tel) {
+    public static String checkTel(String tel) {  //Метод проверки телефона
         Scanner scan = new Scanner(System.in);
 
         String regex = "^\\+?[78][-\\(]?\\d{3}\\)?-?\\d{3}-?\\d{2}-?\\d{2}$"; //допускает варианты:

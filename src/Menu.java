@@ -18,18 +18,18 @@ public class Menu {
         out.println("2. Регистрация");
         out.println("3. Выход");
         out.print("Введите число соответствующее действию: ");
-        int Entrance = 0;
+        int Entrance = 0;                       //Проверка, что введено число
         if (!scan.hasNextInt()) {
             out.println("Ты должен ввести число.\n");
             Entry();
         } else Entrance = scan.nextInt();
 
-        switch (Entrance) {
+        switch (Entrance) {                 //Выбор действия из списка
             case 1: Authorization();
             case 2: {
                 System.out.println("-------------------------------------------");
                 System.out.println("(Регистрация)");
-                Data.CreatePeople("User");
+                Data.CreatePeople("User");                  //Вызов "формы" регистрации
                 out.println("!Вы успешно зарегистрировались как пользователь!");
                 Menu.Entry();
             }
@@ -43,7 +43,7 @@ public class Menu {
     }
     // Authorization user
     public static void Authorization() {
-        ArrayList<String> Log = new ArrayList<String>();
+        ArrayList<String> Log = new ArrayList<String>();   //Переменные для поиска, куда загружаются данные из файла
         ArrayList<String> Pas = new ArrayList<String>();
         ArrayList<String> role = new ArrayList<String>();
         ArrayList<String> numPeop = new ArrayList<String>();
@@ -71,14 +71,14 @@ public class Menu {
         out.print("Введите логин: ");
         Login = scan.next();
 
-        if (Log.contains(Login)) {
+        if (Log.contains(Login)) {    //Проверяем существует ли уже введенный логин
             int index = Log.indexOf(Login);
             out.print("Введите пароль: ");
             Password = scan.next();
-            if (Pas.get(index).equals(Password)) {
+            if (Pas.get(index).equals(Password)) {  //Проверяем пароль от логина
                 String Rol = role.get(index);
                 String numF = numPeop.get(index);
-                switch (Rol) {
+                switch (Rol) {                  //Переходы на формы в зависимости от роли и снилса
                     case "Admin": {
                         Admin.main(Data.GetFIO(numF));
                         break;
@@ -91,13 +91,13 @@ public class Menu {
                     }
                 }
             }
-            else {
+            else {                                          //Действия в случае неверно введенных данных
                 out.println("Неверный пароль.");
-                Entry();
+                Authorization();
             }
         } else {
             out.println("Неверный логин.");
-            Entry();
+            Authorization();
         }
 
     }
