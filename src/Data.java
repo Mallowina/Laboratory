@@ -2,18 +2,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.System.out;
 
 public class Data {
+    public static ArrayList<String>list = new ArrayList<>();
     public static void List(String nameList) {          //Метод выводящий все данные из файла
         try (Scanner Scan = new Scanner(new File(nameList))) {
             if (!Scan.hasNext()) {
                 out.println("File is empty");
             }
             while (Scan.hasNextLine()) {
-                out.println(Scan.nextLine());
+                list.add(Scan.nextLine());
             }
         } catch (FileNotFoundException e) {
             System.out.printf("File [%s] is not found.\n");
@@ -29,7 +30,7 @@ public class Data {
                     try (Scanner ScanPeop = new Scanner(new File("ListOfPeople.txt"))) {
                         while (ScanPeop.hasNextLine()) {
                             String line = ScanPeop.nextLine();
-                            if (line.contains(snils)) out.println(line);
+                            if (line.contains(snils)) list.add(line);
                         }
                     } catch (FileNotFoundException e) {
                         System.out.printf("File [%s] is not found.\n");

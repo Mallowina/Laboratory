@@ -4,41 +4,101 @@ import java.lang.String;
 import static java.lang.System.*;
 import java.io.*;
 
+import javafx.event.*;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
+import javafx.stage.*;
+import javafx.scene.*;
+
 public class Menu {
     public static Scanner scan = new Scanner(System.in);
     public static String Login, Password, NumFile;
     public static String UserFile, LoginFile, PasswordFile;
     public static boolean Flag = false, Input = false, Duplicate = true;
     // Main menu
+    public static Stage stage = new Stage();
     public static void Entry() {
-        out.println("-------------------------------------------");
-        out.println("Главное меню лаборатории");
-        out.println("\"Чтобы вернуться в главное меню введите: 0\"");
-        out.println("1. Авторизация");
-        out.println("2. Регистрация");
-        out.println("3. Выход");
-        out.print("Введите число соответствующее действию: ");
-        int Entrance = 0;                       //Проверка, что введено число
-        if (!scan.hasNextInt()) {
-            out.println("Ты должен ввести число.\n");
-            Entry();
-        } else Entrance = scan.nextInt();
 
-        switch (Entrance) {                 //Выбор действия из списка
-            case 1: Authorization();
-            case 2: {
-                System.out.println("-------------------------------------------");
-                System.out.println("(Регистрация)");
-                Data.CreatePeople("User");                  //Вызов "формы" регистрации
-                out.println("!Вы успешно зарегистрировались как пользователь!");
-                Menu.Entry();
+
+        Text auth = new Text("Авторизация: ");
+        auth.setLayoutY(80);    // установка положения надписи по оси Y
+        auth.setLayoutX(100);   // установка положения надписи по оси X
+
+        Text txtLog = new Text("Login:");
+        txtLog.setLayoutY(105);    // установка положения надписи по оси Y
+        txtLog.setLayoutX(10);   // установка положения надписи по оси X
+        TextField log = new TextField();
+        log.setLayoutX(90);
+        log.setLayoutY(90);
+
+        Text txtPas = new Text("Password:");
+        txtPas.setLayoutY(135);    // установка положения надписи по оси Y
+        txtPas.setLayoutX(10);   // установка положения надписи по оси X
+        PasswordField pas = new PasswordField();
+        pas.setLayoutX(90);
+        pas.setLayoutY(120);
+
+        Button btnAuth = new Button("Enter");
+        btnAuth.setLayoutY(160);    // установка положения надписи по оси Y
+        btnAuth.setLayoutX(100);   // установка положения надписи по оси X
+        btnAuth.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Login = log.getText();
+                Password = pas.getText();
+                Authorization();
             }
-            case 3: exit(0);
-            default: {
-                out.println("Введи число соответсвующее списку\n");
-                Entry();
+        });
+
+        Button btnEx = new Button("Exit");
+        btnEx.setLayoutY(400);    // установка положения надписи по оси Y
+        btnEx.setLayoutX(200);   // установка положения надписи по оси X
+        btnEx.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.close();
             }
-        }
+        });
+
+        Group group = new Group(auth, log, txtLog, pas, txtPas, btnAuth, btnEx);
+        Scene scene = new Scene(group);
+        stage.setScene(scene);
+        stage.setTitle("Главное меню"); // установка заголовка
+        stage.setWidth(400);
+        stage.setHeight(750);
+
+        stage.show();                   // отображение окна на экране
+
+//        out.println("-------------------------------------------");
+//        out.println("Главное меню лаборатории");
+//        out.println("\"Чтобы вернуться в главное меню введите: 0\"");
+//        out.println("1. Авторизация"); +
+//        out.println("2. Регистрация");
+//        out.println("3. Выход");       +
+//        out.print("Введите число соответствующее действию: ");
+//        int Entrance = 0;                       //Проверка, что введено число
+//        if (!scan.hasNextInt()) {
+//            out.println("Ты должен ввести число.\n");
+//            Entry();
+//        } else Entrance = scan.nextInt();
+//
+//        switch (Entrance) {                 //Выбор действия из списка
+//            case 1: Authorization();
+//            case 2: {
+//                System.out.println("-------------------------------------------");
+//                System.out.println("(Регистрация)");
+//                Data.CreatePeople("User");                  //Вызов "формы" регистрации
+//                out.println("!Вы успешно зарегистрировались как пользователь!");
+//                Menu.Entry();
+//            }
+//            case 3: exit(0);
+//            default: {
+//                out.println("Введи число соответсвующее списку\n");
+//                Entry();
+//            }
+//        }
 
     }
     // Authorization user
@@ -66,38 +126,48 @@ public class Menu {
         }
 
         // Access check
-        out.println("-------------------------------------------");
-        out.println("(Авторизация)");
-        out.print("Введите логин: ");
-        Login = scan.next();
+
 
         if (Log.contains(Login)) {    //Проверяем существует ли уже введенный логин
             int index = Log.indexOf(Login);
-            out.print("Введите пароль: ");
-            Password = scan.next();
             if (Pas.get(index).equals(Password)) {  //Проверяем пароль от логина
                 String Rol = role.get(index);
                 String numF = numPeop.get(index);
                 switch (Rol) {                  //Переходы на формы в зависимости от роли и снилса
                     case "Admin": {
                         Admin.main(Data.GetFIO(numF));
+                        stage.hide();
                         break;
                     }
                     case "User": {
                         User.User(Data.GetFIO(numF), numF);
+                        stage.hide();
+                        break;
                     }
                     case "Assistant": {
                         Laborant.work();
+                        stage.hide();
+                        break;
                     }
                 }
             }
             else {                                          //Действия в случае неверно введенных данных
-                out.println("Неверный пароль.");
-                Authorization();
+                if (Password.equals("")) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Поле пароля пустое", ButtonType.OK);
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.NONE, "Неверный логин ili пароль", ButtonType.OK);
+                    alert.showAndWait();
+                }
             }
         } else {
-            out.println("Неверный логин.");
-            Authorization();
+            if (Login.equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Поле логин пустое", ButtonType.OK);
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Неверный логин ili пароль", ButtonType.OK);
+                alert.showAndWait();
+            }
         }
 
     }
