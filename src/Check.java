@@ -1,3 +1,6 @@
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,32 +10,31 @@ import static java.lang.System.out;
 
 public class Check {
     public static String checkN(String word) {  //Метод проверки таких данных как ФИО
-        Scanner scan = new Scanner(System.in);
-
         String regex = "[a-zA-Zа-яёА-ЯЁ]+";
 
         if (!word.matches(regex)) {
-            out.println("Ошибка ввода. Введите заново. ");
-            word = checkN(scan.next());
+            Alert alert = new Alert(Alert.AlertType.NONE, "Неверно введены данные ФИО.", ButtonType.OK);
+            alert.showAndWait();
+            return "no";
         }
         return word;
     }
 
     public static String checkSn(String snils) {   //Метод проверки СНИЛСа
-        Scanner scan = new Scanner(System.in);
-
         String regex = "\\d+";
 
         if (snils.length() != 11 || !snils.matches(regex)) {
-            out.println("Ошибка ввода. Введите заново. Количество символов не 11.");
-            snils = checkSn(scan.next());
+            Alert alert = new Alert(Alert.AlertType.NONE, "Неверно введены данные СНИЛС. Проверьте правильность ввода и количество символов", ButtonType.OK);
+            alert.showAndWait();
+            return "no";
         }
         try (Scanner Scan = new Scanner(new File("ListOfPeople.txt"))) {
             while (Scan.hasNextLine()) {
                 String text[] = Scan.nextLine().split(" ");
                 if (snils.equals(text[0])) {
-                    out.println("Такой СНИЛС уже существует.");
-                    snils = checkSn(scan.next());
+                    Alert alert = new Alert(Alert.AlertType.NONE, "Такой СНИЛС уже используется", ButtonType.OK);
+                    alert.showAndWait();
+                    return "no";
                 }
             }
         } catch (FileNotFoundException e) {
@@ -48,8 +50,9 @@ public class Check {
             while (Scan.hasNextLine()) {
                 String text[] = Scan.nextLine().split(" ");
                 if (log.equals(text[0])) {
-                    out.println("Такой логин уже существует.");
-                    log = checkLog(scan.next());
+                    Alert alert = new Alert(Alert.AlertType.NONE, "Такой логин уже существует", ButtonType.OK);
+                    alert.showAndWait();
+                    return "no";
                 }
             }
         } catch (FileNotFoundException e) {
@@ -65,8 +68,9 @@ public class Check {
         Matcher matcher = pattern.matcher(date);
 
         if (!matcher.matches()) {
-            out.println("Ошибка ввода. Введите заново. Проверьте правильность формата даты.");
-            date = checkDate(scan.next());
+            Alert alert = new Alert(Alert.AlertType.NONE, "Неверно введена дата", ButtonType.OK);
+            alert.showAndWait();
+            return "no";
         }
         return date;
     }
@@ -77,8 +81,9 @@ public class Check {
         String regex = "^\\+?[78][-\\(]?\\d{3}\\)?-?\\d{3}-?\\d{2}-?\\d{2}$"; //допускает варианты:
                                                                               //89103123167
         if (!tel.matches(regex)) {                                            //+7-910-221-22-22
-            out.println("Ошибка ввода. Введите заново. ");                    //+7(910)-221-22-22
-            tel = checkTel(scan.next());                                      //ну и в таком духе
+            Alert alert = new Alert(Alert.AlertType.NONE, "Неверно введен номер телефона", ButtonType.OK);
+            alert.showAndWait();                                              //+7(910)-221-22-22
+            return "no";                                                      //ну и в таком духе
         }
         return tel;
     }

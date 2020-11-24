@@ -1,8 +1,12 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import static java.lang.System.out;
 
@@ -95,31 +99,108 @@ public class Data {
     }
 
     public static void CreatePeople(String role) {  //Метод получения данных о пользователе и отправление их на запись
-        Scanner scan = new Scanner(System.in);
+        Stage stage = new Stage();
 
-        out.print("Фамилия: ");
-        String FIO = Check.checkN(scan.next());
-        out.print("Имя: ");
-        FIO += " " + Check.checkN(scan.next());
-        out.print("Отчество: ");
-        FIO += " " + Check.checkN(scan.next());
-        out.print("Дата рождения (Пример: 02.01.2020): "); //10
-        String date = Check.checkDate(scan.next());
-        out.print("СНИЛС(Пример: 70955214100): ");
-        String snils = Check.checkSn(scan.next());
-        out.print("Номер телефона(Примеры: \n+79029706364\n89103123167\n+7(910)-221-22-22\n+7-910-221-22-22): ");
-        String tel = Check.checkTel(scan.next());
+        Text txtF = new Text("Фамилия:");
+        txtF.setLayoutY(10);    // установка положения надписи по оси Y
+        txtF.setLayoutX(10);   // установка положения надписи по оси X
+        TextField f1 = new TextField();
+        f1.setLayoutX(120);
+        f1.setLayoutY(10);
+        Text txtN = new Text("Имя:");
+        txtN.setLayoutY(30);    // установка положения надписи по оси Y
+        txtN.setLayoutX(10);   // установка положения надписи по оси X
+        TextField f2 = new TextField();
+        f2.setLayoutX(120);
+        f2.setLayoutY(30);
+        Text txtOt = new Text("Отчество:");
+        txtOt.setLayoutY(60);    // установка положения надписи по оси Y
+        txtOt.setLayoutX(10);   // установка положения надписи по оси X
+        TextField f3 = new TextField();
+        f3.setLayoutX(120);
+        f3.setLayoutY(60);
+        Text txtDate = new Text("Дата рождения (Пример: 02.01.2020):");
+        txtDate.setLayoutY(90);    // установка положения надписи по оси Y
+        txtDate.setLayoutX(10);   // установка положения надписи по оси X
+        TextField f4 = new TextField();
+        f4.setLayoutX(120);
+        f4.setLayoutY(90);
+        Text txtSn = new Text("СНИЛС(Пример: 70955214100):");
+        txtSn.setLayoutY(120);    // установка положения надписи по оси Y
+        txtSn.setLayoutX(10);   // установка положения надписи по оси X
+        TextField f5 = new TextField();
+        f5.setLayoutX(120);
+        f5.setLayoutY(120);
+        Text txtTel = new Text("Номер телефона(Пример: +79029706364");
+        txtTel.setLayoutY(150);    // установка положения надписи по оси Y
+        txtTel.setLayoutX(10);   // установка положения надписи по оси X
+        TextField f6 = new TextField();
+        f6.setLayoutX(120);
+        f6.setLayoutY(150);
 
-        out.print("Введите логин: ");
-        String Login = Check.checkLog(scan.next());
-        out.print("Введите пароль: ");
-        String Password = scan.next();
-        // Data recording
-        Data.registPeop(FIO, date, snils, tel);
-        Data.addLog(Login, Password, role, snils);
+        Button btnCon = new Button("Продолжить");
+        btnCon.setLayoutY(440);    // установка положения надписи по оси Y
+        btnCon.setLayoutX(200);   // установка положения надписи по оси X
+        btnCon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String F, I, O, date, snils, tel, all;
+                F = Check.checkN(f1.getText());
+                I = Check.checkN(f2.getText());
+                O = Check.checkN(f3.getText());
+                date = Check.checkDate(f4.getText());
+                snils = Check.checkSn(f5.getText());
+                tel = Check.checkTel(f6.getText());
+                all = F + I + O + date + snils + tel;
 
-        out.println("");
+                if (!all.contains("no")) {
+                    Text txtLog = new Text("Login:");
+                    txtLog.setLayoutY(10);    // установка положения надписи по оси Y
+                    txtLog.setLayoutX(10);   // установка положения надписи по оси X
+                    TextField log = new TextField();
+                    log.setLayoutX(90);
+                    log.setLayoutY(10);
+                    Text txtPas = new Text("Password:");
+                    txtPas.setLayoutY(30);    // установка положения надписи по оси Y
+                    txtPas.setLayoutX(10);   // установка положения надписи по оси X
+                    TextField pas = new TextField();
+                    pas.setLayoutX(120);
+                    pas.setLayoutY(30);
 
+
+
+                    Button btnReg = new Button("Registration");
+                    btnReg.setLayoutY(440);    // установка положения надписи по оси Y
+                    btnReg.setLayoutX(200);   // установка положения надписи по оси X
+                    btnReg.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            String Login = Check.checkLog(log.getText());
+                            String Password = pas.getText();
+                            if (!Login.equals("no")) {
+                                String FIO = F + " " + I + " " + O;
+                                Data.registPeop(FIO, date, snils, tel);
+                                Data.addLog(Login, Password, role, snils);
+                                stage.hide();
+                            }
+                        }
+                    });
+
+
+                    Group group = new Group(txtLog, txtPas, log, pas, btnReg);
+                    Scene scene = new Scene(group);
+                    stage.setScene(scene);
+                }
+            }
+        });
+
+        Group group = new Group(txtF, txtN, txtOt, txtDate, txtSn, txtTel, f1, f2,f3,f4,f5,f6, btnCon);
+        Scene scene = new Scene(group);
+        stage.setScene(scene);
+        stage.setTitle("Регистрация"); // установка заголовка
+        stage.setWidth(400);
+        stage.setHeight(750);
+        stage.show();
     }
 }
 

@@ -1,17 +1,10 @@
-import javafx.beans.property.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import static java.lang.System.*;
-import java.io.*;
-import java.util.*;
-
 public class Admin {
     public static String FIO;
     public static void main(String fio) {
@@ -72,6 +65,24 @@ public class Admin {
                 Data.list.clear();
             }
         });
+        Button btnReg1 = new Button("Добавить лаборанта");
+        btnReg1.setLayoutY(500);    // установка положения надписи по оси Y
+        btnReg1.setLayoutX(200);   // установка положения надписи по оси X
+        btnReg1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Data.CreatePeople("Assistant");
+            }
+        });
+        Button btnReg2 = new Button("Добавть администратора");
+        btnReg2.setLayoutY(520);    // установка положения надписи по оси Y
+        btnReg2.setLayoutX(200);   // установка положения надписи по оси X
+        btnReg2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Data.CreatePeople("Admin");
+            }
+        });
         Button btnEx = new Button("Exit");
         btnEx.setLayoutY(460);    // установка положения надписи по оси Y
         btnEx.setLayoutX(200);   // установка положения надписи по оси X
@@ -92,7 +103,7 @@ public class Admin {
             }
         });
 
-        Group group = new Group(adm, btnList, btnList2, btnList3, btnEx, btnExAu);
+        Group group = new Group(adm, btnList, btnList2, btnList3, btnEx, btnExAu, btnReg1, btnReg2);
         Scene scene = new Scene(group);
         stage.setScene(scene);
         stage.setTitle("Администратор"); // установка заголовка
@@ -100,45 +111,5 @@ public class Admin {
         stage.setHeight(750);
 
         stage.show();                   // отображение окна на экране
-
-//        Scanner scan = new Scanner(System.in);
-//
-//        out.println("\n\n -----------------------------------");
-//        out.println("Приветствуем " + fio + "!");
-//        out.println("Доступные действия: ");
-//        out.println("\t1. Просмотреть информацию о пользователях");    +
-//        out.println("\t2. Просмотреть информацию о лаборантах");       +
-//        out.println("\t3. Просмотреть информацию об администраторах"); +
-//        out.println("\t4. Добавить нового лаборанта");
-//        out.println("\t5. Добавить нового администратора");
-//        out.println("\t6. Выход");
-//        out.print("Для выполнения действия введите номер: ");
-//
-//        int action = 0;
-//        if (!scan.hasNextInt()) {               //Проверка, что введено число
-//            out.println("Ты должен ввести число.\n");
-//            main(FIO);
-//        } else action = scan.nextInt();
-//
-//        switch (action) {
-//            case 1: Data.SnilsRole("User"); main(FIO);     //Вызов метода выводящей инфромацию о пользователях с соответствующей ролью
-//            case 2: Data.SnilsRole("Assistant"); main(FIO);
-//            case 3: Data.SnilsRole("Admin"); main(FIO);
-//            case 4: {
-//                out.println("Для добавления нового лаборанта введите след. данные");
-//                Data.CreatePeople("Assistant");  //Вызов метода для создания нового пользователя с соответствующей ролью
-//                main(FIO);
-//            }
-//            case 5: {
-//                out.println("Для добавления нового администратора введите след. данные");
-//                Data.CreatePeople("Admin");
-//                main(FIO);
-//            }
-//            case 6: Menu.Entry();
-//            default: {
-//                out.println("Введи число соответсвующее списку\n");
-//                main(FIO);
-//            }
-//        }
     }
 }

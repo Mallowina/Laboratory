@@ -3,11 +3,8 @@ import java.util.Scanner;
 import java.lang.String;
 import static java.lang.System.*;
 import java.io.*;
-
 import javafx.event.*;
-import javafx.geometry.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -61,8 +58,15 @@ public class Menu {
                 stage.close();
             }
         });
+        Button btnReg = new Button("reg");
+        btnReg.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Data.CreatePeople("User");
+            }
+        });
 
-        Group group = new Group(auth, log, txtLog, pas, txtPas, btnAuth, btnEx);
+        Group group = new Group(auth, log, txtLog, pas, txtPas, btnAuth, btnReg, btnEx);
         Scene scene = new Scene(group);
         stage.setScene(scene);
         stage.setTitle("Главное меню"); // установка заголовка
@@ -70,36 +74,6 @@ public class Menu {
         stage.setHeight(750);
 
         stage.show();                   // отображение окна на экране
-
-//        out.println("-------------------------------------------");
-//        out.println("Главное меню лаборатории");
-//        out.println("\"Чтобы вернуться в главное меню введите: 0\"");
-//        out.println("1. Авторизация"); +
-//        out.println("2. Регистрация");
-//        out.println("3. Выход");       +
-//        out.print("Введите число соответствующее действию: ");
-//        int Entrance = 0;                       //Проверка, что введено число
-//        if (!scan.hasNextInt()) {
-//            out.println("Ты должен ввести число.\n");
-//            Entry();
-//        } else Entrance = scan.nextInt();
-//
-//        switch (Entrance) {                 //Выбор действия из списка
-//            case 1: Authorization();
-//            case 2: {
-//                System.out.println("-------------------------------------------");
-//                System.out.println("(Регистрация)");
-//                Data.CreatePeople("User");                  //Вызов "формы" регистрации
-//                out.println("!Вы успешно зарегистрировались как пользователь!");
-//                Menu.Entry();
-//            }
-//            case 3: exit(0);
-//            default: {
-//                out.println("Введи число соответсвующее списку\n");
-//                Entry();
-//            }
-//        }
-
     }
     // Authorization user
     public static void Authorization() {
