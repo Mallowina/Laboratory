@@ -1,0 +1,21 @@
+
+
+
+#btn {
+-fx-border-width: 2px;
+-fx-border-style: solid;
+-fx-color: #000000;
+-fx-border-color: #000000;
+
+-fx-font-size: 20;
+  }
+
+#btn:hover{
+-fx-border-width: 2px;
+-fx-border-style: solid;
+-fx-color: #292929;
+-fx-border-color: #111110;
+
+-fx-font-size: 25;
+-fx-left: 100px;
+}
